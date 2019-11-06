@@ -96,9 +96,11 @@ Such a component-based approach has led the evolution of drones, but such practi
 In this paper, we introduce a system-level approach to enhance flight range and time of drones.
 Such an approach is not fundamentally new, but to our knowledge, we are the first to attempt a systematic framework \textbf{inspired by} electronic design automation (EDA) technique.
 
-%%%
-% need the systematic framework block diagram  
-%%%
+\begin{figure}[ht]
+\centering\includegraphics[scale=0.6]{fig16/system-framework.pdf}
+\caption{The systematic framework of the drone optimization.}
+\label{fig:freamwork}
+\end{figure}
 
 Unlike previous work, we have elaborated the power consumption model of drones, characterized the power model with the actual flight data of the drone and the effect of external elements such as wind and the load weight, and constructed an accurate simulator.
 Such an effort becomes a basis of systematic optimization of drones.
@@ -153,13 +155,6 @@ The optimization of the drone using the numerical algorithm is good for expressi
 On the other hand, the studies to solve the optimization of drones using the graph search theory are optimized by finding a path of drone that minimizes the power consumption as the drone moves according to each step set in the graph. 
 Z. Lui focuses on deriving the optimal path using the fast marching method, a variant of the Dijkstra algorithm, and a flight endurance model based on hovering power consumption and battery model~\cite{ref_10}.
 
-Unlike the previous papers, \cite{ref_8,ref_9} established and optimized power consumption model based on the actual flight data of the drone.
-Authors measured the power consumption and the speed of drones through experiments \cite{ref_8}. They also expressed the power consumption as a function of speed to derive an energy-efficient aerial flight path using Back-and-forth algorithm.
-In \cite{ref_9}, the power consumption is established as a multivariate regression model based on the data measured through actual flight experiments of the drone.
-The minimum time path is also derived by considering the battery recharging in the case of multiple destinations.
-
-We present Table~\ref{Table: survay_result} that shows the factors considered for optimization in each study, the algorithms used for the optimization, and the goals of the optimization.
-Each study attempted to consider factors that could influence the power consumption of drones externally during the optimization process. 
 \begin{table*}[ht]
 \caption{Comparison of Previous Works for Drone Optimization.}
 \label{Table: survay_result}
@@ -176,6 +171,14 @@ SysCon 2017 {[}10{]} & O & - & - & fast marching method & optimal path \\ \hline
 arXiv 2017 {[}9{]} & O & O & - & Dynamic graph algorithm & minimum time \\ \hline
 \end{tabular}
 \end{table*}
+
+Unlike the previous papers, \cite{ref_8,ref_9} established and optimized power consumption model based on the actual flight data of the drone.
+Authors measured the power consumption and the speed of drones through experiments \cite{ref_8}. They also expressed the power consumption as a function of speed to derive an energy-efficient aerial flight path using Back-and-forth algorithm.
+In \cite{ref_9}, the power consumption is established as a multivariate regression model based on the data measured through actual flight experiments of the drone.
+The minimum time path is also derived by considering the battery recharging in the case of multiple destinations.
+
+We present Table~\ref{Table: survay_result} that shows the factors considered for optimization in each study, the algorithms used for the optimization, and the goals of the optimization.
+Each study attempted to consider factors that could influence the power consumption of drones externally during the optimization process. 
 
 We use graph search method to optimize the drone movement. The graph search method is easy to implement the fields and constraint on which the drones can move, and can easily calculate the long-term operation of drones in the implemented graph.
 However, since the movement of drone is limited to each step of the graph, it is difficult to infer the continuous movement of the drone in the step, and it is also difficult to calculate the high dimension that can’t be visualized so that the speed or direction is fixed to reduce the dimensions.
@@ -239,9 +242,9 @@ To check the DC offset correctly, we measure the power consumption of the drone 
 
 \begin{figure}[ht]
 \centering
-\subfloat[The power measurement test on the ground.]{\includegraphics[scale= 1.0]{fig1/Ground_test.pdf}}
+\subfloat[The power measurement test on the ground.]{\includegraphics[scale= 0.8]{fig1/Ground_test.pdf}}
 \qquad
-\subfloat[Comparison of the current flow between NI DAQ and on board measurement.]{\includegraphics[scale=1.05]{fig1/NIvsDJI.pdf}}
+\subfloat[Comparison of the current flow between NI DAQ and on board measurement.]{\includegraphics[scale=1.0]{fig1/NIvsDJI.pdf}}
 \caption{Experiment set for the power measurement on the ground and the result.}
 \label{fig:Ground_test}
 \end{figure}
@@ -277,6 +280,9 @@ The values of measured voltage and current are stored to the SD card as the bina
 All measurement tasks on the power measurement board store data at a sampling rate of 1~kHz under the management of FreeRTOS real time operating system.
 Fig.~\ref{fig:board} shows components of the completed power measurement board.
 
+Fig.~\ref{fig:flight_test} illustrates how we measure the power consumption data of the drone in flight.
+The measured current value on the power measurement board has an error of less than 6\% compared with the high precision data acquisition device. By installing a light weight power measurement board with high accuracy on the drone, we collect power data instead of the incorrect on board genuine flight computer.
+
 \begin{figure}[ht]
 \centering
 \includegraphics[scale=0.80]{fig3/flight_experiment.pdf}
@@ -286,13 +292,10 @@ Fig.~\ref{fig:board} shows components of the completed power measurement board.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[scale=1.05]{fig4/flight_exp_result.pdf}
+\includegraphics[scale=1.0]{fig4/flight_exp_result.pdf}
 \caption{Comparison of the current measurement by each measurement device. The power measurement board presents data as accurate as NI DAQ.}
 \end{figure}
 \label{Section: Design the power measurement board}
-
-Fig.~\ref{fig:flight_test} illustrates how we measure the power consumption data of the drone in flight.
-The measured current value on the power measurement board has an error of less than 6\% compared with the high precision data acquisition device. By installing a light weight power measurement board with high accuracy on the drone, we collect power data instead of the incorrect on board genuine flight computer.
 
 
 
@@ -314,15 +317,15 @@ It is necessary to take account in this effect as a factor in the power consumpt
 If a drone flies in the same direction as the wind, the drone consumes less power; if the drone flies in the opposite direction, the power consumption increases as the air resistance increases. 
 This phenomenon becomes more severe while the overall surface area of drone increases as we mention in Section~\ref{Section: Power consumption model for drones}.
 
-However, measuring wind speed and direction in real-time is very difficult because turbulence frequently occurs at high altitudes in which the drone fly, and the effects of air irregularities on the drone are unpredictable.
-So, many studies conduct experiments using artificial wind or wind information of the area where the drone is flying provided by the national meteorological agency~\cite{ref_5,ref_9}. 
-Nevertheless, it is true that in the real situation, the drone encounters the turbulence that changes drone's altitude or velocity; so, if the drone does not have a tool to measure the influence of the wind, wind direction and speed cannot be used as a actual factor in the power consumption model of the drone. 
-
 \begin{figure}[ht]
-\centering\includegraphics[scale=0.8]{fig5/wind_sensor.pdf}
+\centering\includegraphics[scale=0.75]{fig5/wind_sensor.pdf}
 \caption{The picture of installed wind sensor FT-205 and DJI's RTK GNSS}
 \label{fig:wind_sensor}
 \end{figure}
+
+However, measuring wind speed and direction in real-time is very difficult because turbulence frequently occurs at high altitudes in which the drone fly, and the effects of air irregularities on the drone are unpredictable.
+So, many studies conduct experiments using artificial wind or wind information of the area where the drone is flying provided by the national meteorological agency~\cite{ref_5,ref_9}. 
+Nevertheless, it is true that in the real situation, the drone encounters the turbulence that changes drone's altitude or velocity; so, if the drone does not have a tool to measure the influence of the wind, wind direction and speed cannot be used as a actual factor in the power consumption model of the drone. 
 
 In this work, we measure the actual wind, which affects the drone's power consumption. We attach a wind sensor FT205~\cite{ref_15} in Fig.~\ref{fig:wind_sensor} on the drone. 
 The wind sensor measures the direction and speed of the wind affecting drones with a sampling rate of 10 Hz and a maximum error of 0.3 m/s.
@@ -369,7 +372,6 @@ The algorithm can predict and classify a target based on the attributes learned 
 Deep neural networks consist of several hidden layers between the input layer and the output layer.
 As the hidden layers become deeper, the characteristics of the input data can be more abstracted through each hidden layer.
 The DNNs can extract characteristics from input data and create a complex model with few data elements, unlike the conventional data regression methods.
-
 However, DNNs have a disadvantage in that the complex relationship between the input set and the neural net structure is unknown since it is based on a black-box model. 
 Therefore, there is no clear criterion on how to select the hyper-parameters such as learning rate, hidden layers, and the number of neurons to construct the optimal structure of the deep neural network. 
 When constructing a model for power consumption prediction using DNNs, the hyper-parameters of neural networks should be set optimally to increase the accuracy of the model and prevent over-fitting between the model and training data to minimize the adverse effects on the model.
@@ -424,7 +426,6 @@ We use the model with hyper-parameter with the lowest error rate as the power co
 We configure the environment of the drone flight for verifying our power consumption model. 
 The on board SDK provided by DJI is used in conjunction with the meta software Robot Operating System (ROS), which is used in the robotics field, to simulate the automatic driving of drones. 
 Autonomous driving simulation of the drone through the program is much easier to adjust the velocity and acceleration required for the drone operation than the user can directly control the controller. 
-Fig.~\ref{fig:SDK} shows the on board SDK environment of M600 for autonomous driving simulation.
 
 \begin{figure}[htbp]
 \centering\includegraphics[scale=0.285]{fig7/SDK.pdf}
@@ -432,18 +433,21 @@ Fig.~\ref{fig:SDK} shows the on board SDK environment of M600 for autonomous dri
 \label{fig:SDK}
 \end{figure}
 
+Fig.~\ref{fig:SDK} shows the on board SDK environment of M600 for autonomous driving simulation.
 In order to validate the accuracy of the power consumption model, we upload the autonomous driving simulation program to the drone to perform the actual flight and compare the power consumption predicted by the power consumption model with the actual power consumption. 
 
-\begin{figure*}[ht]
+\begin{figure}[ht]
 \centering
-\subfloat[Drone power consumption when hovering.]{\centering\includegraphics[scale=1.12]{fig8/Hover8x3.pdf}}
-\subfloat[Drone power consumption when ascending and descending.]{\centering\includegraphics[scale=1.12]{fig8/AD8x3.pdf}}
+\subfloat[Drone power consumption when hovering.]{\centering\includegraphics[scale=1.0]{fig8/Hover8x3.pdf}}
 \qquad
-\subfloat[Drone power consumption when interval flight.]{\centering\includegraphics[scale=1.12]{fig8/Interval8x3.pdf}}
-\subfloat[Drone power consumption when squared-shaped flight.]{\centering\includegraphics[scale=1.12]{fig8/Square8x3.pdf}}
+\subfloat[Drone power consumption when ascending and descending.]{\centering\includegraphics[scale=1.0]{fig8/AD8x3.pdf}}
+\qquad
+\subfloat[Drone power consumption when interval flight.]{\centering\includegraphics[scale=1.0]{fig8/Interval8x3.pdf}}
+\qquad
+\subfloat[Drone power consumption when squared-shaped flight.]{\centering\includegraphics[scale=1.0]{fig8/Square8x3.pdf}}
 \caption{Comparison of measured power consumption and predicted power consumption under the benchmark flights.}
 \label{fig: benchmark}
-\end{figure*}
+\end{figure}
 
 Fig.~\ref{fig: benchmark} shows the measured power and estimated power when i) the drone is hovering in the air, ii) the drone repeats vertical flights (ascending and descending without horizontal movement), iii) the drone is flying an interval flight path that repeats horizontal flights (straight flight and back straight flight without vertical movement), and iv) the drone is flying a rectangular and level flight path, respectively. 
 We compare the power estimated by the proposed power model with the measured flight data and confirm that the error of each benchmark test is 6.27\%, 9.8\%, 7.82\%, and 9.12\%, respectively.
@@ -453,10 +457,6 @@ We compare the power estimated by the proposed power model with the measured fli
 
 
 \subsection{Effect of weight and surface area on drones}
-% 우리는 수집 된 데이터를 기반으로 taget drone 인 M600이 translational lift의 효과를 받아 에너지를 효율적으로 활용 할 수 있는 드론의 속도 구간을 제시 한다. 베이스 라인은 드론에 어떠한 부착물 없이 등속을 유지하는 상태에서 바람 센서가 바람의 영향이 없을 정도 (0 ~ 1 m/s)의 세기를 기록할 때 드론의 등속도 대비 거리 당 소비한 에너지이다.
-% 무게 라인은 드론에 부하가 걸린 상태에서 등속을 유지히며 드론에 어떠한 부착물 없이 등속을 유지하는 상태에서 바람 센서가 바람의 영향이 없을 정도 (0 ~ 1 m/s)의 세기를 기록할 때 등속도 대비 거리 당 소비한 에너지이다.
-% 윈드 라인은 두 라인과는 다르게, 바람 센서가 드론의 방향의 반대쪽의 6 m/s의 세기를 기록할 때 드론의 등속도 대비 거리 당 소비한 에너지이다.
-%이 후 Fig. 10 처럼 드론에 외부 영향을 가했을 때 속도 구간이 변하는 모습을 기록한다.
 It is very important to consider the weight of the aircraft and the effects of wind, when referring to aircraft such as drones.
 As the total weight of a drone increases, the thrust demanded by the drone to perform the flight increases, increasing the power consumption of the drone. 
 Also, when a drone delivers a payload, the wind resistance increases by the surface area of the shipment, which also affects power consumption.
@@ -464,7 +464,7 @@ We collect data by varying the shape of boxes and the weight of payloads and the
 Also, too heavy loads are very inefficient to be transported by drone, so the experiment was carried out by adding up to 2kg, which is about half the weight that M600 can carry.
 
 \begin{figure}[ht]
-\centering\includegraphics[scale=1.05]{fig9/compare_weight8x4.pdf}
+\centering\includegraphics[scale=1.0]{fig9/compare_weight8x4.pdf}
 \caption{Comparison result of the power consumption model with payload and without payload during constant velocity flight of 6 m/s.}
 \label{fig: Model_weight}
 \end{figure}
@@ -483,7 +483,7 @@ Unlike the two lines, the wind line is the energy consumed per distance versus t
 As shown Fig.~\ref{fig: lift}, we propose how the speed range changes when an external influence is applied to the drone.
 
 \begin{figure}[ht]
-\centering\includegraphics[scale=1.05]{fig10/t_lift.pdf}
+\centering\includegraphics[scale=1.0]{fig10/t_lift.pdf}
 \caption{The effect of The translational lift on the optimal velocity for the least energy consumption per a meter.}
 \label{fig: lift}
 \end{figure}
@@ -494,8 +494,6 @@ Adding weight to the drone greatly increase the overall power consumption of the
 As the above results, the drone has various optimum flight velocity according to the environment, and the optimal method of operating the drone can be determined by combining the optimum flight velocity and the battery consumption of the drone. 
 Therefore, it is very important that the power consumption model correctly represents the fluctuations in power consumption due to the weight and wind. 
 The power consumption model that can infer power consumption in any environment is the basis for optimizing the energy consumption of the drone.
-
-% 그러나 드론에 무게를 추가한 경우에는 translational lift effect에 기반한 거리 대비 에너지 최적 속도가 M600의 안전 운용 범위 (바람이 없는 상태에서 최대 18 m/s) 밖으로 벗어난다. 때문에 실험을 진행하지 않고 차후 이종 드론을 취급 할 때 소형 드론을 이용한 실험을 통해 진행 할 것이다. 무게에 의한 영향에 인한 전력 소비 비교와 경로의 변화 탐색은 우리의 다음 일로 남겨둔다.
 
 Note that when weight is added to the drone, the velocity based on the translational lift becomes outside on the M600's safe operating range (up to 18 m/s without the wind). Unavoidably, we cannot experiment in this paper to determine the effect of payload weight because of a safety issue. But later, we will proceed with experiments using small drones to handle heterogeneous drones.
 
@@ -509,7 +507,6 @@ Note that when weight is added to the drone, the velocity based on the translati
 
 
 \section{Flight energy optimization and its validation}
-
 We predict the energy consumption when a drone arrives from a starting point to a designated destination, avoiding obstacles encountered while flying downtown from an energy efficiency point of view. After deriving a flight path that consumes the least energy based on the power consumption model, we validate the usefulness of the our optimization method of drone by flying the derived path to a real drone and comparing the energy consumption.
 As we mentioned in Section~\ref{Section: Related works}, there are advantages and disadvantages to the method of optimizing drones through numerical algorithm and the method of optimizing drones through graph algorithms.
 However, to optimize the overall operation of the drones, the optimization method must be able to consider both the environment and the time of drone operation. 
@@ -522,34 +519,30 @@ Therefore, we optimize the overall movement of the drone by using a graph algori
 
 \subsection{Configuration of optimization problem}
 
+\begin{figure}[ht]
+\centering
+\subfloat[The isometric view of the visualization of the environment around which drones fly.]{\centering\includegraphics[scale=0.9]{fig11/obs.pdf}}
+\qquad
+\subfloat[The direction that the drone can move in a visualized environment.]{\centering\includegraphics[scale=0.25]{fig11/Direction.pdf}}
+\caption{Visualization of the driving environment of drones and moving direction system of drones within the environment.}
+\label{fig: opt_env}
+\end{figure}
+
 We model the operating environment of the drones as Fig.~\ref{fig: opt_env}(a).
 The environment is assumed that there are various types of building between the start and end points in a space where the maximum range of the N- and E-axis is 400m and the U-axis is 80m, respectively.
 We assume that the drone can move 10m for each step of horizontal axis movements and 3m for each step of vertical axis movements. We also assume that the drone cannot pass through obstacles. In addition, the drone moves in one direction per step by selecting a moving direction.
 In the Fig.~\ref{fig: opt_env}(b), there are 26 directions of the drone to move from the current step to the next step.
 But, when optimizing the path of the drone with one destination, the backward direction must be excluded because the drone consumes more energy as the operating time becomes longer. Therefore, we conclude that there are total 17 directions for drones to move on to the next step.
 
-\begin{figure}[ht]
-\centering
-\subfloat[The isometric view of the visualization of the environment around which drones fly.]{\centering\includegraphics[scale=1.0]{fig11/obs.pdf}}
-\qquad
-\subfloat[The direction that the drone can move in a visualized environment.]{\centering\includegraphics[scale=0.30]{fig11/Direction.pdf}}
-\caption{Visualization of the driving environment of drones and moving direction system of drones within the environment.}
-\label{fig: opt_env}
-\end{figure}
-
 The velocity of the drone moving between nodes is determined based on the translational lift effect in Fig~\ref{fig: lift} that the M600 consumes the least energy per distance with each case of the drone environment. 
 The minimum energy consumption velocity per distance of the M600 can be changed at any time due to the external influences.  
 Previous studies using the graph search algorithm assume that objects move at constant velocity between nodes because it is difficult to calculate the instantaneous movement of objects moving between steps~\cite{ref_8, ref_10, ref_22}. 
 However, we set the search range of the drone velocity from a minimum of 6 m/s to a maximum of 15 m/s. We also take into account the effect of drone acceleration, which significantly affects drone power consumption.
 Problems that arise when considering acceleration of drones on the optimization problem and heuristics applied to solve them are discussed in Subsection~B.
-
 To configure optimization problem, we construct a graph that consists of nodes and edges from the referred three-dimensional space with the assumption that there is no influence of the radius of curvature of the earth.
 The node contains the parameters of drone and the factor of the external environment and has as many edges as all the elements it contains. 
 The edge is a path that can be moved between nodes and has its own weight. The edge-node graph moves between nodes by comparing the weights assigned to the edges.  
 
-%%%%%
-% eliminate the this figure
-%%%
 \begin{comment}
 \begin{figure}[htbp]
 \centering\includegraphics[scale=0.85]{fig12/Node_graph.pdf}
@@ -661,7 +654,7 @@ At baseline, the total power consumption by the drone from the start point to th
 In addition, as the power consumption model used for optimization considers acceleration, the acceleration and deceleration occurring in the drastic direction of drone change considerably change the speed of the drone, which is different from the energy consumption of the existing baseline.
 
 \begin{figure}[ht]
-\centering\includegraphics[scale=1.05]{fig14/S_E.pdf}
+\centering\includegraphics[scale=1.0]{fig14/S_E.pdf}
 \caption{Comparison of the total energy consumption value by the simulator calculation and M600 flight measurement through travel distance.}
 \label{fig:consumed_energy}
 \end{figure}
@@ -677,66 +670,69 @@ The validation through the actual flight of the drone shows that the energy cons
 
 \subsection{Effect of wind on the optimal drone path}
 
-The previous optimized path in Fig.~\ref{fig: opt_environ} excludes the effect of wind to compare the difference in energy consumption in the path changes, but the wind effect must be taken into account when referring to the aircraft.
+The optimized path in Fig.~\ref{fig: opt_environ} excludes the wind effect to compare the difference in energy consumption in the path changes only, but the wind effect must be considered when referring to the aircraft in the real world.
 However, unlike when constructing a power consumption model, in the optimization stage, there is no way to receive wind data in real time, so we set a constant wind direction and speed in an environment constructed like a weather forecast information.
 Then, we search the path that drone consumes the least energy in the environment where the wind effect exist, and compares the energy consumption with the previous optimized path found when there is no existing wind effect.
 
 \begin{figure*}[ht]
 \centering
-\subfloat[case 1. The wind speed of 6~m/s, the wind direction of NW and SE of, the different altitudes of points, and the drone progress of SE direction.]{\centering\includegraphics[scale=0.75]{fig15/case1.pdf}}
-\subfloat[The top view of case 1.]{\centering\includegraphics[scale=0.75]{fig15/case1_top.pdf}}
-\subfloat[The side view of case 1.]{\centering\includegraphics[scale=0.75]{fig15/case1_side.pdf}}
+\subfloat[case 1. The wind speed of 6~m/s, the wind direction of NW and SE of, the different altitudes of points, and the drone progress of SE direction.]{\centering\includegraphics[scale=0.71]{fig15/case1.pdf}}
+\subfloat[The top view of case 1.]{\centering\includegraphics[scale=0.71]{fig15/case1_top.pdf}}
+\subfloat[The side view of case 1.]{\centering\includegraphics[scale=0.71]{fig15/case1_side.pdf}}
 \qquad
-\subfloat[case 2. The wind speed of 6~m/s, the wind direction of NW and SE of, the different altitudes of points, and the drone progress of SW direction.]{\centering\includegraphics[scale=0.75]{fig15/case2.pdf}}
-\subfloat[The top view of case 2.]{\centering\includegraphics[scale=0.75]{fig15/case2_top.pdf}}
-\subfloat[The side view of case 2.]{\centering\includegraphics[scale=0.75]{fig15/case2_side.pdf}}
+\subfloat[case 2. The wind speed of 6~m/s, the wind direction of NW and SE of, the different altitudes of points, and the drone progress of SW direction.]{\centering\includegraphics[scale=0.71]{fig15/case2.pdf}}
+\subfloat[The top view of case 2.]{\centering\includegraphics[scale=0.71]{fig15/case2_top.pdf}}
+\subfloat[The side view of case 2.]{\centering\includegraphics[scale=0.71]{fig15/case2_side.pdf}}
 \qquad
-\subfloat[case 3. The wind speed of 6~m/s, the wind direction of random, the same altitudes of points, and the drone progress of SE direction. ]{\centering\includegraphics[scale=0.75]{fig15/case3.pdf}}
-\subfloat[The top view of case 3.]{\centering\includegraphics[scale=0.75]{fig15/case3_top.pdf}}
-\subfloat[The side view of case 3.]{\centering\includegraphics[scale=0.75]{fig15/case3_side.pdf}}
+\subfloat[case 3. The wind speed of 6~m/s, the wind direction of random, the same altitudes of points, and the drone progress of SE direction. ]{\centering\includegraphics[scale=0.71]{fig15/case3.pdf}}
+\subfloat[The top view of case 3.]{\centering\includegraphics[scale=0.71]{fig15/case3_top.pdf}}
+\subfloat[The side view of case 3.]{\centering\includegraphics[scale=0.71]{fig15/case3_side.pdf}}
 \caption{Results of the energy minimum path optimization of drones affected by the wind.}
 \label{fig: wind_opt}
 \end{figure*}
 
-Fig.~\ref{fig: wind_opt} (a), (d), and (g) are the optimization cases derived from the flight environment of drones with different initial conditions.
-To confirm the optimization results according to the change in the wind for all three cases, we apply the strong wind speed with 6~m/s and the wind direction in the north-west (NW) and south-east (SE) directions.
+We present all of the optimization paths in the Fig.~\ref{fig: wind_opt}. 
+Fig.~\ref{fig: wind_opt} (a), (d), and (g) is the optimization cases derived from the flight environment of drones with different initial conditions and the two figures next to optimization cases are side-view and top-view to identify the changes in the path and the difference in elevation. 
+We apply wind speeds of 6 m/s in the northwest (NW) and southeast (SE) directions in all cases to confirm the optimization results that change with the influence of the wind.
 The baseline of each case is a path derived after assuming that there is no wind effect as Fig.~\ref{fig: opt_environ} and the energy consumption of the baseline is calculated when the drone flies along the baseline applied by wind direction and speed.
-We present all of the optimization paths in the figure as side view and top view to identify the changes in the path and the difference in elevation and we also present Table~\ref{tab: opt.result} comparing the energy consumption of the baseline and the optimized path affected by wind effect in each case.
-
-
-%% 결론 부분을 더 확실하게 명시할 것
-\begin{table}[ht]
-\caption{Comparison of the energy consumption between the baseline and the optimal path affected by wind effect in each case.}
-\label{tab: opt.result}
-\resizebox{0.485\textwidth}{!}{%
-\begin{tabular}{|c|c|c|c|c|l|l|}
-\hline
-\multicolumn{1}{|l|}{\multirow{2}{*}{}} & \multicolumn{1}{l|}{\multirow{2}{*}{Wind direction}} & \multicolumn{2}{c|}{Energy consumption} & \multicolumn{3}{l|}{\multirow{2}{*}{Saved energy (\%)}} \\ \cline{3-4}
-\multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{} & Baseline (kJ) & Optimal path (kJ) & \multicolumn{3}{l|}{} \\ \hline
-\multirow{2}{*}{Case 1} & NW & 41.58 & 40.91 & \multicolumn{3}{c|}{2.25} \\ \cline{2-7} 
-& SE & 62.86 & 58.63  & \multicolumn{3}{c|}{6.73}   \\ \hline
-\multirow{2}{*}{Case 2} & NW & 46.23 & 44.59 & \multicolumn{3}{c|}{3.55}  \\ \cline{2-7} 
-& SE & 50.68 & 49.55 & \multicolumn{3}{c|}{2.23}    \\ \hline
-Case 3 & Random & 52.29 & 45.65 & \multicolumn{3}{c|}{12.7} \\ \hline
-\end{tabular}%
-}
-\end{table}
 
 In Fig.~\ref{fig: wind_opt}(a), the starting point is lower than the endpoint and the drone moves south-east direction through the path created. 
 When the SE direction wind is applied to the entire environment, the baseline and the optimal path is the almost same.
 However, the energy consumption of the two paths differs, the optimal path shows a change in velocity compared to the baseline maintaining the speed based on the translational lift and saves 2.25~\% energy compared to the baseline.
 On the other hand, when the wind in the NW direction is applied, the derived optimal path saves 6.73~\% of energy compared to the baseline by changing the path.
 Since the wind direction is the reverse direction of travel, the energy consumption of the drone increases a lot and the path fluctuates large enough to be intuitively identified in Fig.~\ref{fig: wind_opt}(b) and Fig.~\ref{fig: wind_opt}(c).  
-
 Fig.~\ref{fig: wind_opt}(d) is a different route than Fig.~\ref{fig: wind_opt}(a), where the endpoint is higher than the starting point and the drone moves southwest through the path created. When the south-east wind is applied, the optimal path and baseline show a big difference of the route, the optimal path is 3.55~\% efficient than the baseline.
 Instead, when the north-west wind is applied, the path difference is small but the length of the drone rising diagonally is long. the optimal path saves 2.23~\% of energy than the baseline.
 The wind effect applied on the side direction of the drone travel causes a change in all optimization paths, with the difference in energy consumption depending on the altitude and path over which the drone crosses the obstacles.
-
 Unlike the previous cases, Fig.~\ref{fig: wind_opt}(g) shows how the optimization path changes when the winds are randomly placed.
 Given that random winds affect the drone's flight, such as the environment in which actual drones operate, the optimal path is more various than when the wind effect is applied in one direction.
-The derived optimal path saves 12.7~\% of energy compared to the baseline.
+The derived optimal path saves 12.7~\% of energy compared to the baseline. 
+Finally, we present optimization results as Table~\ref{tab: opt.result} that comparison of the energy consumption between the baseline and the optimized path affected by wind effect in each case.
 
-%표로 정리한다, % 바람을 고려하지 않는 최적화 경로 대비 바람에 대응하여 루트를 변경하며 진행 하였을 때 에너지 차이가 남을 보였다.
+\begin{table}[ht]
+\caption{Comparison of the energy consumption between the baseline and the optimal path affected by wind effect in each case.}
+\label{tab: opt.result}
+\resizebox{0.485\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|l|l|}
+\hline
+\multicolumn{1}{|l|}{\multirow{2}{*}{}} & \multicolumn{1}{l|}{\multirow{2}{*}{Wind direction \& speed}} & \multicolumn{2}{c|}{Energy consumption} & \multicolumn{3}{l|}{\multirow{2}{*}{Saved energy (\%)}} \\ \cline{3-4}
+\multicolumn{1}{|l|}{} & \multicolumn{1}{l|}{} & Baseline (kJ) & Optimal path (kJ) & \multicolumn{3}{l|}{} \\ \hline
+\multirow{2}{*}{Case 1} & NW (6 m/s)& 41.58 & 40.91 & \multicolumn{3}{c|}{2.25} \\ \cline{2-7} 
+& SE (6 m/s)& 62.86 & 58.63  & \multicolumn{3}{c|}{6.73}   \\ \hline
+\multirow{2}{*}{Case 2} & NW (6 m/s)& 46.23 & 44.59 & \multicolumn{3}{c|}{3.55}  \\ \cline{2-7} 
+& SE (6 m/s)& 50.68 & 49.55 & \multicolumn{3}{c|}{2.23}    \\ \hline
+Case 3 & Random (6 m/s)& 52.29 & 45.65 & \multicolumn{3}{c|}{12.7} \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+% 테이블 5의 결과는 외력을 배제한 채 수행하는 드론이 최적화 결과는 현실의 드론의 비행과 상당한 차이가 있음을 보인다.
+% 우리가 구성한 최적화 문제와 해결법은 현실 조건과 유사한 랜덤하게 바람이 적용되는 환경에서 도출 된 최적화 경로가 최대의 이익을 보이며, 실제로는 적용이 어려운 현실의 바람의 방향과 속력을 상수로 적용하였을 때에도 에너지를 최소로 소모하는 경로를 도출할 수 있는 신뢰성을 가진다.
+The results in Table~\ref{tab: opt.result} show that the results of the drone optimization performed without external force for convenience of calculation in previous studies differed considerably from the actual flight of drones.
+Our optimization problem and solution show the maximum benefit from the path derived from the randomly winded environment similar to the actual environments. This has the reliability of deriving a path that consumes the least energy even when the wind direction and speed of reality, which are difficult to apply in the real environment, are applied as simple constants.
+
+
+
 
 
 
@@ -748,7 +744,8 @@ The derived optimal path saves 12.7~\% of energy compared to the baseline.
 
 \section{Conclusions}
 
-In this paper, we start from a demonstration that the data provided by the factory on board power measurement feature of even top-of-the-line commercial drones is highly inaccurate by comparing it with standard equipment. 
+In this paper, we present a system framework for optimizing the total operating cost of drones, including accurate power consumption models and optimization methods.
+We start from a demonstration that the data provided by the factory on board power measurement feature of even top-of-the-line commercial drones is highly inaccurate by comparing it with standard equipment. 
 This motivates that the power consumption models shown in the previous work may have generated improper predictions compared with the actual power consumption due to the inaccuracy in the measured data.
 We implement an accurate in-house on-board power measurement device and collect dozens of hours of power measurement data synchronizing with other flying data. 
 Based on the power data, we propose an accurate power consumption model with the deep neural networks. 
@@ -756,7 +753,8 @@ The proposed power consumption model exhibits error within 10\% compared with a 
 The primary benefit of the proposed model is such that i) the model inputs are simple physics parameters of the drone, and external factors affecting power consumption thus it can be easily plugged in various existing optimization framework, and ii) the characterization process is not dependent on the aerodynamics of a particular drone. %iii) considering the three-dimensional velocity and acceleration of the drone at the same time, the power consumption of the drone's momentary movement can easily be predicted.
 Finally, we demonstrate a example of energy saving by finding an energy efficient path during the operation of a drone using the proposed accurate power consumption model. The optimal path is derived by accurately considering the wind effects that are generally difficult to consider, and the optimal path is 12.7~\% more energy efficient than the general drone operation for random wind effects.
 
-%현실 조건과 가장 비슷하게 가정 된 랜덤하게 바람이 적용되는 환경에서 구해진 옵티멀 패스가 바람을 고려하지 않은 채 구해진 최적화 경로에 비하여 최대 12.7%의 이익을 가짐을 보였다. (결론)
+
+
 
 
 
