@@ -99,7 +99,7 @@ Some of the concerns raised by the reviewers are:~\\
 	}
 	\item \textit
 	{
-	R1: We sincerely apologize for many grammar errors. We carefully double-checked whole the manuscript and fully revised sentences. We denoted changed sentences as red color. We appreciate your invaluable comments.
+	R1: We apologize for any grammar errors. We thoroughly double-checked the whole manuscript and completely revised sentences. We highlighted the revised sentences in red color.
 	}
 	~\\
     ~\\
@@ -115,14 +115,9 @@ As the UAS industry continues to expand and with the promise of drone delivery s
 	}
 	\item \textit
 	{
-	R1: We really appreciate your encouraging comment. Yes, our DNNs model has the most accurate power prediction compared with other models. We presented the results of comparing the DNNs model with the existing methodologies in the newly added Subsection V-C.
-    %According to our result, the DNNs model is the highest accuracy compared with other models.
-    However, predicting power consumption through neural networks is relatively slower than using numerical formulas, and the neural networks require a lot of effort to build the model through training: The DNNs model has a trade-off relationship between accuracy and speed.
-    ~\\~\\
-    On the other hand, the DNNs model clearly has an advantage in the accuracy, which is required when performing a large-scale search such as an optimal path planning rather than a real-time search that requires continuous fast power consumption prediction.
-    We progressed offline planning according to the optimization scenario and problem formulation of Section~VI, and we proceeded with optimization through the graph search algorithm in the discretized simulation environment.
-    In the discretized simulation environment, the amount of energy consumption calculated for each step of the environment becomes an essential factor in determining the path of the drone.
-    Therefore, we use the highest accurate model (DNNs) to predict the power consumption in each step of the process for optimizing drone operations.
+	R1: We appreciate your encouraging comments. As you pointed out, our DNNs model exhibits one of the most accurate power predictions compared with other models. We presented the comparison between the DNNs model with the existing methodologies in the newly added Subsection V-C. We do not claim the proposed method is better than existing work in every aspect. It is relatively slower to predict power consumption using neural networks than numerical formulas. Furthermore, neural network power predictions require a lot of effort to build power consumption models through extensive training: The DNNs model has a trade-off relationship between accuracy and speed.~\\ 
+    ~\\
+    Nevertheless, the proposed DNN power model certainly has an advantage in the accuracy, which is very useful in drawing the globally optimal offline path planning rather than a real-time search required for onboard power consumption prediction. We presented the offline path planning according to the optimization scenario and problem formulation of Section VI. We also introduced optimization through a graph search algorithm in the discretized simulation environment. The amount of energy consumption calculated for each computation step becomes an essential factor in determining the drone's path in the discretized simulation environment. Therefore, we use the highly accurate model (DNNs) to predict the power consumption in each step of optimizing drone operations. 
 	}
 	~\\
     ~\\
@@ -166,16 +161,16 @@ As the UAS industry continues to expand and with the promise of drone delivery s
 	}
 	\item \textit
 	{
-	R2: In the modeling process, we installed a wind sensor on the drone, collected the wind data in real-time, and included this data into a learning dataset to configure the power consumption because the wind affects a significant influence on the drone’s power consumption.
-    Apart from the modeling, in the optimization process, the online planning involves several problems using wind data as a parameter.~\\~\\
-    * First of all, the more parameters to consider in the optimization, the more complex the optimization problem becomes. The on-board computer of the drone is not suitable for handling huge computations in real-time.~\\~\\
-    * Second, even if the drone receives the computation results that are solved externally, the drone must deliver wind information to the server for the calculation in real-time. It means the drone requires the additional cost for long-distance communications. Moreover, our goal of the research is to reduce the energy consumption of the drone without significant hardware improvements. The online planning method is not suitable for us.~\\~\\
-    Therefore, we present the offline planning that transmits the optimal path derived by the base station that computes complex computation to the drone under the assumption that there is no sudden accident (e.g., bird strike). However, the offline planning also requires wind information at every grid cell of the simulation environment. In order to derive the optimal path for reality, the simulation environment must be as similar as possible to the actual conditions. We used the computational fluid dynamics (CFD) to interpret the wind flow and made it in the form of a discretized wind map to improve the offline simulation environment close to reality.~\\~\\
-    We used the Dijkstra algorithm, a graph search algorithm, to solve the optimization problem by selecting an edge with the smallest energy consumption among edges connected to the same node. The derived path through edges of the graph is the optimal solution in the discretized environment.    This paper aims to find an optimal energy path for a single drone and a given environment. We do not address the collision issues that occur when multiple drones are in operation.
+	R2: We mounted an onboard wind sensor on the drone during the modeling process and collected real-time wind data. We put the real-time wind data into a learning dataset to configure the power consumption as the wind affects a significant influence on the drone's power consumption. The online planning involves several problems using wind data as a parameter in the optimization process. ~\\~\\
+    * First, the inclusion of more parameters to the optimization process increases complexity super linearly. The onboard computer of the drone has a limited computation power.~\\~\\
+    * Second, the drone must send wind information to the computation server for computation offloading. That is, the drone requires additional communication costs. Moreover, our goal of the research is to reduce the energy consumption of the drone without significant hardware improvements. The online planning method is out of the scope of this work.~\\~\\
+    Therefore, we present the offline planning that transmits the optimal path derived by the base station that computes complex computation to the drone under the assumption that there is no sudden accident (e.g., bird strike). However, offline planning also requires wind information at every grid cell of the simulation environment. The solution fidelity is mostly dependent on how the simulation environment is similar to real conditions. 
+    We adopted the computational fluid dynamics (CFD) to interpret the wind flow and made it in the form of a discretized wind map to improve the offline simulation environment close to reality. ~\\~\\
+    We used the Dijkstra algorithm, a graph search algorithm, to solve the optimization problem by selecting an edge with the smallest energy consumption among the edges connected to the same node. The derived path through the edges of the graph is the optimal solution in the discretized environment. This paper aims to find an optimal energy path for a single drone and a given environment. We do not address the collision issues that occur when multiple drones are in operation.
 	~\\
     ~\\
-    In the manuscript, we added a Subsection to clearly reveal our offline approach as follows:~\\
-}
+   The revised manuscript includes a Subsection to clarify our offline approach as follows: ~\\
+   }
 \textcolor{red}{
 \textcolor{red}{\textit{A. The scenario of the drone optimization process.}}~\\~\\
 In our scenario, the operator inputs information about a starting point and a destination to the main station to assign a task to the drone, as shown in Fig.\,8.
