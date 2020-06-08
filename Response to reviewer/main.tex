@@ -45,8 +45,8 @@
 \setlength{\parindent}{0cm}
 \textbf{\large Editors Comments:}\\
 The reviewers and the editor recognize scientific interest in the manuscript, particularly the exploitation of optimization methods to minimize energy consumption of UAVs. However, the manuscript, in its present form, suffers from several technical and presentation weaknesses, which needs to be addressed. 
-Some of the concerns raised by the reviewers are:~\\
-\textcolor{red}{김재민 교수님이나, 백돈규 교수님께 받은 RR에서는 에디터를 위한 답변은 달리 존재 하지 않았었는데 에디터에게 쓰는 답변은 초본 검토 후에 작성하는게 좋을 것 같습니다. 대신 답변을 위한 내용들을 개괄식으로 작성하겠습니다.}
+Some of the concerns raised by the reviewers are:
+~\\
 \begin{description}
     \item \textbf
 	{
@@ -54,8 +54,7 @@ Some of the concerns raised by the reviewers are:~\\
 	}
 	\item \textit
 	{
-	R1: 리뷰어 3은 현재 트랜드에 맞는 새로운 논문들을 레퍼런스에 추가하길 바라며, 리뷰어 4는 introduction 과 relate works를 조금 더 축약해주길 원합니다.\\
-	리뷰어 3이 추천해준 논문과 현재 트랜드에 적합한 강화 학습을 이용한 논문을 레퍼런스와 related work에 추가하였고, Section 1,2 를 다시 검토해 내용을 축약하였습니다. 
+	R1: We are extremely grateful to the editor for handling our paper for the IEEE Transaction of Vehicular Technology. We added new references about handling the recent trends and adjusted Section I and Section II to fit the paper's volume, as suggested by Reviewer 3 and Reviewer 4.
 	}
 	~\\
 	~\\
@@ -65,8 +64,10 @@ Some of the concerns raised by the reviewers are:~\\
 	}
 	\item \textit
 	{
-	R2: 우리는 Section 6에 새롭게 추가한 subsecion 6-A 에서 우리의 드론의 임무 최적화 과정의 문제를 포뮬레이션 하였으며, 이어지는 Subsection 6-C, 6-D 에 알고리즘들을 통하여 문제를 해결하는 방법을 제시합니다.~\\
-	파워 모델 형성을 위하여 사용한 wind sensor에 관한 내용은 Subsection IV-D에 추가적으로 작성하였고, 저희가 현재 최적화를 진행하고 있는 환경이 온라임이 아님을 언급하며 대체제인 CFD를 Subsection 6-B 에 서술하였습니다.	}
+	R2: We presented a scenario about the process of our drone’s task optimization and formulated the flight energy optimization problem of the drone in Subsection VI-A. 
+    Furthermore, We described a solution to the optimization problem through algorithms in Subsection VI-C and VI-D.
+    We modified Subsection IV-D to describe the contents of the wind sensor used for the power model configuration.
+    We also presented a simulation environment to Subsection VI-B for our offline approach with sufficient fidelity to apply to the reality instead of the online planning.}
     ~\\
     ~\\
 	\item \textbf
@@ -75,7 +76,8 @@ Some of the concerns raised by the reviewers are:~\\
 	}
 	\item \textit
 	{
-	R3: 이 역시 저희가 온라인이 아닌 오프라인 상황에서 최적화를 진행함을 Section 6 에서 언급 하였으며 대신 현실에서 사용할 수 있을 만큼의 최적화 결과를 얻기 위해 우리는 최적화 환경을 CFD를 이용하여 보강 하였음을 Subsection 6-B 에 서술하였습니다.
+	R3: Our offline approach requires wind information at every grid cell of the discretized simulation environment. However, it is complicated to make wind information that contains irregularity similar to reality in a virtual environment. We adopted the computational fluid dynamics (CFD) to interpret the wind flow and made it in the form of a discretized wind to improve the offline simulation environment close to reality.
+    We described that we reinforced our simulation environment using the CFD in Subsection VI-B, and we presented results that compared the derived optimal pass in the virtual environment applied to three cases of wind maps in Section VII.
 	}
 	~\\
 	~\\
@@ -85,7 +87,8 @@ Some of the concerns raised by the reviewers are:~\\
 	}
 	\item \textit
 	{
-	R4: 현재 김재민 교수님과 함께 다시 한번 논문을 체크 하고 있으며, 남은 기간 동안에도 꾸준히 수정하고 확인하겠습니다.
+	R4: We sincerely apologize for any grammar and sentence errors. 
+    We carefully double-checked the manuscript and fully revised sentences, and we denoted changed sentences as red color. 
 	}
 	~\\
 	~\\
@@ -166,25 +169,60 @@ As the UAS industry continues to expand and with the promise of drone delivery s
     * Second, the drone must send wind information to the computation server for computation offloading. That is, the drone requires additional communication costs. Moreover, our goal of the research is to reduce the energy consumption of the drone without significant hardware improvements. The online planning method is out of the scope of this work.~\\~\\
     Therefore, we present the offline planning that transmits the optimal path derived by the base station that computes complex computation to the drone under the assumption that there is no sudden accident (e.g., bird strike). However, offline planning also requires wind information at every grid cell of the simulation environment. The solution fidelity is mostly dependent on how the simulation environment is similar to real conditions. 
     We adopted the computational fluid dynamics (CFD) to interpret the wind flow and made it in the form of a discretized wind map to improve the offline simulation environment close to reality. ~\\~\\
-    We used the Dijkstra algorithm, a graph search algorithm, to solve the optimization problem by selecting an edge with the smallest energy consumption among the edges connected to the same node. The derived path through the edges of the graph is the optimal solution in the discretized environment. This paper aims to find an optimal energy path for a single drone and a given environment. We do not address the collision issues that occur when multiple drones are in operation.
-	~\\
+    We used the Dijkstra algorithm, a graph search algorithm, to solve the optimization problem by selecting an edge with the smallest energy consumption among the edges connected to the same node. The derived path through the edges of the graph is the optimal solution in the discretized environment. This paper aims to find an optimal energy path for a single drone and a given environment. We do not address the collision issues that occur when multiple drones are in operation.}
     ~\\
-   The revised manuscript includes a Subsection to clarify our offline approach as follows: ~\\
-   }
-\textcolor{red}{
-\textcolor{red}{\textit{A. The scenario of the drone optimization process.}}~\\~\\
-In our scenario, the operator inputs information about a starting point and a destination to the main station to assign a task to the drone, as shown in Fig.\,8.
-The station holds the power consumption model of the drone and wind maps about the operating environment, and the station derives the path between points entered from the operator.
-% Offline 최적화임을 여기서 언급
-Since the optimization is performed offline at the main station, it is impossible to modify the optimal path already drawn while the drone is running. Also, in this paper, we do not assume that the station considers the unexpected situations such as bird-strike or wind-sheer.
-% 외부 바람을 고려하기 위해 전용 툴을 쓴다는 것을 여기서 언급함
-However, we analyze the predictable external forces such as wind level and direction using the sophisticated analysis tool to take full advantage of the effects of external forces in creating the optimal path of the drone. 
-After that, the drone receives the optimized path from the station and then runs to the destination along the path. We formulate the flight energy optimization problem of the drone as the following:}
-\\
-\\
+    ~\\
+    ~\\
+    \textbf{The revised manuscript includes Subsection VI-A to clarify our offline approach as follows:}~\\
+
+    \begin{mdframed}[ linewidth=.75pt, userdefinedwidth=0.9\textwidth]
+    \textbf{A. The scenario for the drone optimization process.}~\\
+    ~\\
+    \textcolor{red}{Our scenario lets the operator input the information about a starting point and a destination to the drone base station and assigns a delivery task to a drone, as shown in Fig. 8. The base station has the power consumption model of drones and the wind map of the operation space, and the base station derives the path between two points entered by the operator. Once again, once the base station performed optimization, and the drone is flying, it is impossible to modify the derived path. Furthermore, we do not assume that the optimization considers unexpected situations such as bird-strike or wind-sheer, which is out of the scope of this paper. However, we do take into account predictable external forces such as wind speed and direction. We formulate the flight energy optimization problem of the drone as the following:
+    ~\\
+    \textcolor{red}{
+    \vspace{7pt}
+    \hrule
+    \vspace{5pt}
+    \noindent\textit{\textbf{Flight energy optimization problem formulation}}
+    \vspace{5pt}
+    \hrule
+    \vspace{5pt}
+    \noindent Workspace $W$ is a subset of $\mathbb{R}^3$ that drones can maneuver, and $F(\cdot)$, $B(\cdot)$ take the $W$ as the domain:\\
+    \indent Workspace, \textit{$W\subset\mathbb{R}^3$, $w_n=(x_n,y_n,z_n)$, $w_n \in W$ }\\
+    \indent Blockage, \textit{$BL(w_n)=bl_n$}, while blockage $bl_n\in\{0,1\}$\\
+    \indent Wind field, \textit{$F(w_n) = (windx_n, windy_n)$}, while $windx_n$ is  
+    x-axis wind velocity and $windy_n$ is y-axis wind velocity
+    at $w_n$, respectively.
+    \vspace{5pt}
+    \hrule
+    \vspace{5pt}
+    \noindent\textit{\textbf{Given:}}~\\
+    \indent $W, F(\cdot), BL(\cdot)$~\\
+    \indent Set of delivery missions, $M = \{m_1, ..., m_J\},$~\\ 
+    \indent $m_j = (from, to, package\;volume, package\;weight)$~\\
+    \noindent\textit{\textbf{Control knob:}}~\\
+    \indent Path, finite sequence of $(w,v)$,~\\
+    \indent $R = \{(w_0,v_0), ..., (w_N,v_N)\}$, while $v$ is a velocity vector.
+    ~\\
+    \noindent\textit{\textbf{Objective:}}~\\ 
+    \indent Minimize total consumption energy~\\
+    \indent\indent $\sum_{j=1}^J E(m_j,R_j)$,~\\
+    \indent while $E$ is energy consumption for the delivery mission $m_j$ through a path $R_j$, which satisfies~\\
+    \indent\indent $BL(w_n) = 0, \forall w_n \in \bigcup_{1}^J R_j,$~\\
+    \indent\indent $E(m_j, R_j) \leq$ Initial battery capacity.
+    \vspace{5pt}
+    \hrule
+    \vspace{5pt}
+    }
+    \vspace{5pt}
+    }
+    ~\\
+    \end{mdframed}
+    ~\\~\\
 \end{description}
 ~\\
-~\\
+\pagebreak
 ~\\
 \textbf{\large Reviewer 3:}\\
 The paper is an interesting study, which focuses on a deep learning based method to develop a better power consumption model for multirotors.
@@ -199,8 +237,7 @@ This model is then used an optimization strategy for energy consumption minimiza
 	}
 	\item \textit
 	{ 
-	R1: We appreciate the reviewer for kind advice. We carefully check the recommended paper, and refer it in Section~II. We also contained an online planning paper of the drone using reinforcement learning to our references, which is appropriate for recent trends.
-    By adding these two latest papers, we listed the literature reviews in Section II and have revised Table I, the result of our literature review, to the following.  
+	R1: We appreciate the reviewer for the kind advice. We carefully checked the recommended paper and referred to it in Section II. We also contained a paper regarding an online path planning using reinforcement learning into our references for recent trends. We revised Table I, which is the result of our literature review, by adding those two latest papers.  
 	}
     ~\\
     ~\\
@@ -268,7 +305,9 @@ The errors at the end are RMSE?
 	}
 	\item \textit
 	{
-	R2-1: We apologize such confusing phrases. We fully agree to the suggestion of the reviewer. We made it clear that the word `experiment' in the paper after Section VI. so that the reader does not get confused. In particular, the title of Section~VII presents optimization results through simulation. We modified the title and manuscript as follows.
+	R2-1: We apologize for such confusing phrases. We carefully checked our manuscript and revised it as followings:~\\~\\
+    * We made clear that the word “experiment” meant the actual flight using a drone.~\\
+    * We modified the title of Section VII that present optimization results through the simulation.
 	}
 	~\\
 	~\\
@@ -286,7 +325,7 @@ The errors at the end are RMSE?
     ~\\	
     \item \textit
     {
-    R2-2: We apologize that the notations are not matched with in the text and figures. We also apologize an unclear expression `error rate.' We carefully double-checked whole the manuscript and fully revised notations. We present the error rate of the power model as RMSE based on the actual data since the error rate is RMSE as the reviewer commented.
+    R2-2: We apologize to the reviewer for our mistakes. We carefully double-checked figures and manuscripts and fully revised notations. We also presented the error rate of the power model as RMSE based on the actual data by considering the reviewer’s comments.
     }
     ~\\
     ~\\
@@ -298,8 +337,7 @@ The errors at the end are RMSE?
     ~\\~\\
 	\item \textit
 	{
-	R2-3: The RMSEP presented in previous TABLE III is an indicator for the rank of grid search results for optimizing parater for optimal neural network structure. But, we already present the specific optimal neural network configuration through the grid search method at the end of Subsection~V-A. Therefore, we delete the TABLE~III so that the reader would not be confused. 
-	%Also, we match the notations of Figure.7 and the result description, which evaluate the configured power model at the end of Subsection~V-B, and 
+	R2-3: The RMSEP presented in Table III of the previous manuscript is an indicator for the rank of grid search results that optimize the neural network structure. However, we already offer a consequence of optimal neural network configuration at the end of Subsection~V-A. Therefore, we delete Table III so that the reader would not be confused. 
 	}
 	~\\
     ~\\
@@ -332,11 +370,10 @@ It takes 370 hours to effectively find the best solution. In this case, the auth
 	}
 	\item \textit
 	{
-	R3: Thank you so much for your comment and observation. We think that our phrase is not clear.
-	The grid search for finding the optimal neural network structure takes 370 hours. However, we do not repeat the grid search unless there is a change in the input variables of the power consumption model.
-	In other words, 370 hours is required only once.
-    The power consumption model under optimal neural network structure takes about 10 minutes to retrain the model with new data.
-    We revise the sentence to distinguish between the grid search and model training in Section~V.
+	R3: Thank you so much for your comment and careful observation. As you pointed out, the grid search takes 370 hours for finding the optimal neural network structure.
+    However, we do not implement the grid search whenever we apply it to an application. We only perform the grid search again when there is a change in the types of input variables.
+    Once we determine the power model's optimal network structure, it only takes 10 minutes to retrain the power model with new data. 
+    We revised the sentence to distinguish between the grid search and model training in Section~V.
 	}
 	~\\
     ~\\
@@ -356,11 +393,8 @@ Wind speed varies with height up to a certain elevation. However in the testing,
 	}
 	\item \textit
 	{
-	R4: We really appreciate the reviewer’s observation, and the reviewer’s comment is correct. So, in the revised manuscript, we refer a paper~[18]. There is a phenomenon called ‘wind gradient’ in which the speed of the wind slows as it approaches the ground.
-    Our goal is to find the minimum energy path through path changes affected by external environment conditions, so the wind information of the optimization environment should be as realistic as possible.~\\~\\
-    Therefore, in the revised manuscript, we newly apply the flow analysis results using the computational fluid dynamic (CFD) to our optimization environment as the wind map through discretization.
-    Even if the CFD is not suitable for online planning because it takes a lot of time to analyze the fluid flow, we already assumed that our framework is used in the base station, which proceeds with the offline planning, already stores wind maps for all kinds of wind direction and speed.
-    We explained the CFD and wind maps in Subsection~VI-B and presented the Fig.13 of wind maps used in simulation in Subsection~VII-B.
+	R4: We really appreciate the reviewer's careful observation. We included a reference paper~[18] to consider the reviewer's comment in the revised manuscript. This paper describes that the airflow has irregularity characteristics, and there is a phenomenon called "wind gradient," the wind becomes slow as it approaches the ground. These properties of the wind make it difficult to analyze its influence on drones. Nevertheless, we need to set wind information reflecting the reality at every grid cell of the simulation environment for the optimal offline path planning.
+    Therefore, we applied the wind flow analysis results as the discretized wind map format in our optimization environment by using the computational fluid dynamics(CFD). If the base station in our scenario already stores wind maps for all kinds of wind direction and speed, the computational speed considered as a problem of CFD does not matter in our offline approach. We introduced the CFD and wind maps in Subsection~VI-B and presented the Fig.13 of wind maps used in simulation in Subsection~VII-B.
 	}
 	~\\
     ~\\
@@ -443,9 +477,11 @@ Wind speed varies with height up to a certain elevation. However in the testing,
 	}
 	\item \textit
 	{
-	R5-1: We are thankful for the review of your kind advice. We agree that the information about DP should be useful to the reader. In this paper, we derive the drone's minimum energy path using the graph search algorithm in an offline manner at the base station and send the path to the drone to perform the optimal flight.
-    We present the procedure of finding the drone's minimum energy path as Algorithm 2 in Subsection V-D.
-    We also described the process of the optimal path planning in the graph line-by-line through the Dijkstra algorithm.
+	R5-1: We are thankful to the reviewer for the kind advice. As you pointed out, we included an explanation about the algorithm for the reader.
+    Our scenario lets the operator enter the information about a starting point and a destination to the drone base station for assigning a delivery task to a drone, as shown in Fig.~8. We assume that the base station has the power consumption model of each drone and the wind maps of the operation space. 
+    And then, the base station derives the optimal path between two points received from the operator by using the Dijkstra algorithm.
+    We presented the Dijkstra algorithm used to find the minimum energy path as Algorithm~2 and also described line-by-line how it works in Subsection~V-D.
+    Finally, the base station transmits the optimal path to the drone, and the drone can save energies by driving along the received path.
 	}
 	~\\
     \pagebreak ~\\
@@ -541,30 +577,25 @@ Wind speed varies with height up to a certain elevation. However in the testing,
     ~\\
 	\item \textit
 	{
-	R5-2: RTDP~[4] searches the optimal velocity for each step of the discretized environment in the local solution space. %However, the sequence of the optimum velocity chosen for local spaces through RTDP may not be globally optimal in the overall environment.
-	There are problems with the computational cost of online planning. Since, the drone’s onboard computer is not suitable for computing complex algorithms. Even if the complex computation that is solved externally is sent to drones in real-time, the drone requires additional cost for long-distance communications. The time racks that occur during long-distance communication also increase the power consumption of drones.
-	~\\
-	~\\
-    Our research is to reduce the energy consumption of the drone without significant hardware improvements. The online planning method is not suitable for us.
-    Instead of online planning, we have created an optimization environment similar to reality.
-    Under the assumption that there is no sudden accident (e.g., bird strike), we present the method that transmits the optimal path derived by the base station that computes complex computation to the drone to reduce the drone's energy consumption.
+	R5-2: RTDP~[4] searches the optimal velocity of a local solution for each step of the discretized environment. However, the RTDP’s computational cost could be a problem in the online planning because the drone’s onboard computer is not suitable for calculating a sophisticated algorithm. Even if a base station calculates a complex computation instead of the drone, The continuous long-distance communication between the station and the drone requires additional devices and energy consumption.
+	Our research aimed to reduce the drone’s energy consumption without significant hardware improvements, so the online planning method is not suitable for us. 
+    Our approach has chosen to improve the optimization environment closer to reality instead of the online planning. 
+    The base station computed complex computation and transmitted a reliable minimum energy path to the drone under the assumption that there is no sudden accident (e.g., bird strike and vertical wind-shear.).
+    However, it is impossible to modify the optimal path already drawn while the drone is running since the optimization is performed offline at the main station.
 	}
 	~\\
 	\item \textit
 	{
-	R5-3: The Dijkstra algorithm requires the RAM capacity as much as the size of the graph, and the computational cost depends on the grid resolution of our environment.
-    Our one DP sweep in the simulation is to explore the minimum energy path from the start node to the destination node. It takes less than half of a second.
+	R5-3: One DP sweep finds a minimum energy path from a start node to a destination node since our method considers the entire solution space of a specific grid resolution. (Therefore, the computational cost depends on the grid resolution of the simulation environment and) It takes about half of a second to get an optimal path in our simulation configuration.
 	}
 	~\\
 	\item \textit
 	{
-	R5-4: Our parameters of the algorithm are factors comprising the node $n_i$ (6.1), and we determine the number of nodes $N_n$ by the number of steps per each parameter in the environment. 
-    All nodes of the graph are initially stored in the priority queue. Then, the algorithm modifies the priority of neighboring nodes of every node in the priority queue, requiring $N_e$ iterations. Therefore the time complexity of the algorithm is $O(N_e log(N_n))$ since the time complexity of modifying the priority is $O(log(N_n))$.~\\
-    To reduce the number of node, we apply the heuristic that the backward directions that drone can move are excluded as we described in Section~VI.
-    \\
-    \\
-    When the number of nodes and edges changes according to the change of the parameter of the algorithm, the computational cost changes, but it does not affect the time complexity.
-    We present the information about the Dijkstra algorithm in Subsection VI-D.
+	R5-4: The time complexity of Algorithm 2 is $O(N_elog(N_n))$ from the following facts:~\\~\\
+    * The algorithm iterates over all neighborhoods of every node in the priority queue and modifies the priority of each neighborhood at every iteration.~\\
+    * The required number of iterations is $N_e$, the number of edges in the graph. ~\\
+    * The time complexity of modifying the priority in the priority queue is $O(log(N_n))$, where $N_n$ is the number of nodes in the graph.~\\~\\
+    A node consists of the parameters in~(6.1). Therefore, the number of steps per each parameter determines the number of nodes and edges in the graph. An additional parameter does not change the expression of the time complexity though it changes the number of nodes and edges.
 	}
 	~\\
     ~\\
@@ -586,17 +617,11 @@ Wind speed varies with height up to a certain elevation. However in the testing,
     ~\\
 	\item \textit
 	{
-	R5-5: We formulate our optimization problem and describe it in the additional Subsection of Section VI. We present the scenario for the optimization process of the drone in Fig.8 and variables for optimization into Given, control knob, and objective.~\\
-    In our optimization problem, the workspace $W$ where the drone is operated, the wind information $F$ in the horizontal directions provided through the discretized wind map, and the information of obstacles in the environment $BL$ are $Given$ information.
-    The starting point and destination of the mission, and information of the payload are also $Given$ information.~\\
-    We define the function $Path$ using $w$ within the $W$ and the velocity of the drone $v$ as $R$, and we use the function $Path$ as our control knob.
-    Our objective is to find $Path$ that minimizes the function $E$ of the energy through the optimization process when a base station receives the mission $m$ from a drone.
-    The energy function $E$ cannot exceed the initial battery capacity, $BL$ must be zero for all $w$, and $Path$ consists only of $w$ presented in $W$.~\\
-    Our model for the algorithm is the function of $E$, which is the total energy consumption for the delivery mission.
+	R5-5: We formulate our optimization problem and describe it in the additional Subsection of Section VI. We present the scenario of the optimization in Fig.8 and variables for optimization in $Given$, $Control knob$, and $Objective$.
 	}
 	~\\
 	~\\
-	\textbf{We added newly Subsection~VI-C in the manuscripts as follows (Page 08, Line ZZ.)}\\
+	\textbf{We added new Subsection~VI-C in the manuscripts as follows (Page 08, Line ZZ.)}\\
     \begin{mdframed}[ linewidth=.75pt, userdefinedwidth=0.9\textwidth]
     \textbf{\justify\textcolor{red}{A. Problem formulation}}~\\
     ~\\
@@ -658,8 +683,10 @@ Wind speed varies with height up to a certain elevation. However in the testing,
     ~\\
 	\item \textit
 	{
-	R5-6: The number of nodes and edges varies depending on the grid resolution, and we conducted the computation for the path optimization of the drone using all of the computational resources available to us. When the number of nodes and edges increases with the high grid resolution, we can further refine the parameters that the nodes contain to improve the accuracy of energy consumption prediction or to optimize the drone’s path planning on a broader environment.
-    If the number of nodes and edges decreases with the low grid resolution, we can optimize the drone’s path planning in less time instead of sacrificing the accuracy of the energy consumption prediction.
+	R5-6: The Dijkstra algorithm requires the RAM capacity as much as the graph's size, and the number of nodes and edges depends on grid resolutions.
+    We determine the maximum grid resolution using all available computational resources if the environment range for a mission is given.
+    This maximum grid resolution represents the maximum accuracy of our energy consumption prediction.
+    We also can calculate the drone's optimal path in less time by decreasing the grid resolution that sacrifices the accuracy of the energy consumption prediction.
 	}
 	~\\
     ~\\
@@ -677,29 +704,127 @@ Wind speed varies with height up to a certain elevation. However in the testing,
 	}
 	\item \textit
 	{
-	R6: We sincerely apologize for the error in the sentence. when a drone moves from an arbitrary node in $G$ to adjacent nodes there are two patterns of speed change. When the drone accelerates, it moves its current velocity until the end then it accelerates to the target velocity of an adjacent node. 
-    In the case of the deceleration, the drone moves at a constant velocity toward the adjacent node, then it decelerates to the instantaneous velocity that satisfies an adjacent node to reach the target node.
-    Since the continuous changes in the velocity and acceleration of the drone cannot be calculated in the discretized environment, we calculate the instance power at each node then we apply the averaged power along traveling two nodes.
-%	Since the continuous changes in the velocity and acceleration of the drone are not considered in the discretized environment, we assume that the acceleration and velocity of the drone while moving are the average value between the two nodes.~\\
-    %In Algorithm~1, We denote $\Delta t_1$ as the required time for acceleration or deceleration. 
-    %It is obtained by dividing the velocity difference ($V_n - V_c$) between the current node $n_c$ and the adjacent node $n_n$ by the acceleration in the drone's moving direction.~\\
-    %At this time, the drone's horizontal acceleration is $A_h$, and vertical acceleration is $A_v$. We assume that the drone accelerates with its maximum acceleration. For the target drone M600, the horizontal acceleration is $5~m/s^2$ and vertical acceleration is $1~m/s^2$, respectively.~\\
-    %We corrected Heuristic 2, which contained incorrect sentences, and we explained the process for considering acceleration in the graph search algorithm in Subsection VI-C.
+	R6: First of all, we sincerely apologize for the error in the sentence. We wanted to express that the velocity of the drone increases linearly with the time as we assumed a constant acceleration in Algorithm~1, but we made a mistake. We further revised the manuscript about heuristics and added a detailed description of Algorithm 1 as follows:
 	}
-	~\\
-	~\\
-	\textbf{We modified Section~VI in the manuscripts as follows (Page 10, Line ZZ.)}\\
-    \begin{mdframed}[ linewidth=.75pt, userdefinedwidth=0.9\textwidth]
-    Heuristic 2. \textcolor{red}{About t}he instantaneous velocity at the next node: \textcolor{red}{During the traveling, the drone first accelerates to the target velocity if it is necessary. Then, it moves the remaining distance with constant velocity. In case of the deceleration, the drone moves constant velocity. Then it decelerates to the target velocity lastly.}
-    \end{mdframed} 
     ~\\
     ~\\
-    %~\\ \pagebreak ~\\
-    \textbf{We also modified Section~VI in the manuscripts as follows (Page 10, Line ZZ.)}\\
-    \begin{mdframed}[ linewidth=.75pt, userdefinedwidth=0.9\textwidth]
-\textcolor{red}{In Algorithm 1, when a drone moves from an arbitrary node in $G$ to adjacent nodes there are two patterns of speed change. When the drone accelerates, it moves its current velocity until the end then it accelerates to the target velocity of an adjacent node (Line 08).}
-\end{mdframed}
+	\textbf{We modified Subsection~VI-C in the manuscript as follows (Page 10, Line ZZ.)}
+    \begin{mdframed} [ linewidth=.75pt, userdefinedwidth=0.9\textwidth]
+    \textbf{\textcolor{red}{C. Algorithm} to \textcolor{red}{calculate traveling time} between each node}~\\
+    ~\\
+    In contrast to the studies using the conventional graph search algorithms that use the heuristics, \textcolor{red}{which exclude} the velocity change to reduce the \textcolor{red}{graph} dimension, we include the drone acceleration that significantly affects its power consumption.
+    Therefore, we \textcolor{red}{define an} algorithm to consider acceleration \textcolor{red}{of the traveling} between each unit node. 
+    %노드를 이동하는 드론의 가속 혹은 감속의 시간이 얼마나 되는지, 혹은 드론이 가속 또는 감속을 할때 드론이 다음 노드의 위치에 정확하게 도달할 수 있게 드론의 이동에 대한 휴리스틱을 고안한다.
+    We devise heuristics about the drone movement to solve \textcolor{red}{how much time is spent to accelerate or decelerate between nodes and how to make the drone accurately reach the position of the next node.
+    %We devise heuristics about the drone movement to solve how much to accelerate or decelerate the drone while moving between nodes, and how to make the drone reach the position of the next node accurately, considering the difference in moving distance generated by proceeding the acceleration or deceleration of the drone.
+    The following heuristics are based on assumptions that the drone must meet when moving between nodes:}
+    \begin{itemize}
+    \item Heuristic 1. \textcolor{red}{About t}he distance and travel time between the current node and the next node: \textcolor{red}{Even if each distance in the three-axis direction is different, we enforce that traveling time in the three-axis is all the same so the drone accurately moves from the previous node to the next node.}
+    \item Heuristic 2. \textcolor{red}{About t}he instantaneous velocity at the next node: \textcolor{red}{During the traveling, the drone first accelerates to the target velocity if it is necessary. Then, it moves the remaining distance with constant velocity. In case of the deceleration, the drone moves constant velocity. Then it decelerates to the target velocity lastly.}
+    \end{itemize}
+    \textcolor{red}{We denote $\Delta t$ as the time taken to reach the target node for each axis between two nodes. It is based on the axis that takes the longest time among three axes. We find $\Delta t$ that satisfies both Heuristic\,1 and\,2 for each axis is obtained through the following Algorithm\,1. 
+    The graph $G$ contains the coordinate information about the discretized operation environment, and it also has parameters of the drone~(6.1).}~\\
+    \textcolor{red}{In Algorithm 1, when a drone moves from an arbitrary node in $G$ to adjacent nodes there are two patterns of speed change. When the drone accelerates, it moves its current velocity until the end then it accelerates to the target velocity of an adjacent node (Line 07). 
+    In the case of the deceleration, the drone moves at a constant velocity toward the adjacent node, then it decelerates to the instantaneous velocity that satisfies an adjacent node to reach the target node (Line 15).
+    We denote $\Delta t_1$ as the required time for acceleration or deceleration. It is obtained by dividing the velocity difference ($V_n - V_c$) between the current node $n_c$ and the adjacent node $n_n$ by the acceleration in the moving direction of the drone (Line 08, Line 16).
+    At this time, the horizontal acceleration of the drone is $A_h$, and vertical acceleration is $A_v$. We assume that the drone accelerates with its maximum acceleration. For the target drone M600, the horizontal acceleration is $5~m/s^2$ and vertical acceleration is $1~m/s^2$, respectively.
+    %Since we cannot express the continuous change in the velocity and acceleration of the drone in the discretized environment, 
+    Since the continuous changes in the velocity and acceleration of the drone cannot be calculated in the discretized environment, we calculate the instance power at each node then we apply the averaged power along traveling two nodes.
+    %We assume that the acceleration and velocity of the drone while moving are the average value between the two nodes.
+    }~\\
+    \textcolor{red}{
+    We denote $\Delta t_2$ as the required time when the drone moves at a constant velocity. 
+    If the drone does not satisfy the moving distance $d$ between nodes during $\Delta t_1$, $\Delta t_2$ is obtained by dividing the remaining distance that the drone needs to reach the adjacent node by the velocity ($V_n$) of the drone at the adjacent node $n_n$ (Line 12, Line 20).
+    We find $\Delta t_1$ and $\Delta t_2$ for each axis between $n_c$ and $n_n$. The largest sum of these two values is chosen in each axis as $\Delta t$  to satisfy flight and velocity conditions to the actual travel time of the drone between $n_c$ and $n_n$ (Line 25).
+    We also insert the equalization process to adjust the changes in flight distance and velocity conditions caused by adjusted $\Delta t$ as actual flight time between nodes since we calculate the flight time of each axis separately.
+    We satisfy Heuristic 1 for each axis by adjusting the velocity and acceleration of the drone in proportion to increased $\Delta t$ on the remaining axes except for the axis having the maximum required time.
+    The drone flies for the duration of $\Delta t_1$. We put acceleration or deceleration to the drone movement to finally reach its target velocity $V_n$ through to satisfy Heuristic 2.
+    Through the above process, we calculate power consumption for every edge and store them.
+    }
+    \end{mdframed}   
+	~\\
+	\textbf{We modified Algorithm~1 in the manuscript as follows (Page 10.)}~\\
+\SetNlSty{}{\color{red}}{:}
+\SetAlFnt{\color{red}}
+\setcounter{algocf}{0}
+%\addtocounter{algorithm}{1}
+\begin{algorithm}[htp]
+\caption{Finding $\Delta t$, which is the travel time between node $n_c$ and $n_n$.}
+\SetAlgoLined
+\KwInput{ \\
+\hskip1.5em $G$ // The graph \\
+\hskip1.5em $V_c$, $V_n$ // The velocity of the current and next node \\
+\hskip1.5em $V_c$ := $(V_c[N], V_c[E], V_c[D])$ \\
+\hskip1.5em $V_n$ := $(V_n[N], V_n[E], V_n[D])$ \\
+\hskip1.5em $A_h, A_v$ // The maximum accelerations of the drone \\
+\hskip1.5em $d$ // The distance between $n_c$ and $n_n$ \\
+\hskip1.5em $d$ := $(d[N], d[E], d[D])$
+}
+\KwOutput{ \\
+\hskip1.5em $\Delta t$ // The longest travel time between $n_c$ and $n_n$
+}
+\nonl \hrulefill \\
+$\Delta t$ := $(\Delta t[N], \Delta t[E], \Delta t[D])$ \\
+Initialize the $\Delta t$ \\
+  $\Delta t[axis] = \Delta t_1 + \Delta t_2$
+\For {$axis \in \{N,E,D\}$ \normalfont{between} $V_c$ \normalfont{and} $V_n$ \normalfont{in} $G$}
+{
+\If {$V_n[axis], V_c[axis] := 0$}
+{
+$\Delta t[axis] = \infty $
+ }
+\ElseIf {$V_n[axis] \ne 0$}
+{ \begin{equation*}
+\small{ \Delta t_1 :=
+\begin{cases}
+\cfrac{V_n[axis] - V_c[axis]}{A_h},~\text{if $axis = x,y$}\\
+\cfrac{V_n[axis] - V_c[axis]}{A_v},~\text{else}\\
+\end{cases}
+}
+\end{equation*}
+\If { $d[axis] = \Delta t_1 \times 
+        {
+            \abs
+            {
+                V_n[axis] + V_c[axis]
+            }
+        }   \div{2} $
+    }
+{
+    $\Delta t_2 := 0$
+}
+\Else
+{
+    $\Delta t_2 := \cfrac{(d[axis] - \Delta t_1 \times \cfrac{\abs{V_n[axis] + V_c[axis]}}{2})}{\abs{V_n[axis]}}$
+}
+}
+\Else
+{
+    \begin{equation*}
+        \small{
+        \Delta t_1 := 
+        \begin{cases}
+            \cfrac{V_n[axis] - V_c[axis]}{A_h},~\text{if $axis = x,y$}\\
+            \cfrac{V_n[axis] - V_c[axis]}{A_v},~\text{else}\\
+        \end{cases}
+        }
+    \end{equation*}
+    \If {($d = \Delta t_1 \times  {\abs{V_n[axis] + V_c[axis]}} \div {2}$)}
+    {
+        $\Delta t_2 := 0$
+    }
+    \Else
+    {
+            $\Delta t_2 := \cfrac{(d[axis] - \Delta t_1 \times \cfrac{\abs{V_n[axis] + V_c[axis]}}{2})}{\abs{V_c[axis]}}$
+    }
+}
+}
+\Return $\Delta t = max(\Delta t)$
+\end{algorithm}
+\SetNlSty{}{\color{black}}{:}
+\SetAlFnt{\color{black}}
 ~\\~\\
+	\pagebreak
     \item \textbf
     {
 	C7: Experimental results: \\
@@ -712,18 +837,25 @@ Wind speed varies with height up to a certain elevation. However in the testing,
 	~\\
 	\item \textit
 	{
-	R7-1: We sincerely apologize less information regarding the methodology. We deeply agree that the experiment section should give enough information to readers. When we configure the environment for the optimization, we store the three-dimensional coordinates and drone parameters on the graph. The node $n_i$ in the graph is defined as (6.1).
+	R7-1: We sincerely apologize for the insufficient information about our methodology. As you pointed out, we deeply agree that we should give readers enough information before starting the simulation section about the optimization.
+    We store the information such as the three-dimensional coordinates and drone’s states on every node of the graph when we configure the simulation environment for the optimization.
+    The node $n_i$ in the graph is defined as~(6.1).
+    ~\\
     \begin{equation*}
     n_i = (x_i, y_i, z_i, v_i, a_i, w_i, d_i). \tag{6.1} \label{eq:node}
     \end{equation*}
-    The algorithm parameters are the number of nodes, and we determine the number of nodes $N_n$ by the number of steps per each parameter in the environment. 
-    We also explained how the graph search algorithm applied to our optimization problem with Algorithm 2 and Subsection VI-D (R5-1).
+    ~\\
+    Our parameter of the algorithm is the number of nodes and edges. We determine the number of nodes $N_n$ by dividing the environment range for a mission into the grid resolution.
+    We obtain the number of edges by multiplying the number of nodes, the number of directions the drone can move in, and the number of speeds in the given ranges the drone can select.
+    We also explained how the graph search algorithm applied to our optimization problem with Algorithm~2 and Subsection~VI-D (R5-1).
 	}
 	~\\
 	\item \textit
 	{
-	R7-2: We conducted the simulation using the matlab of Mathwork. Our computational cost is the amount of RAM in the size of a graph to create an optimization environment. We determine the number of nodes by the number of steps per each parameter in the environment. We wrote the range of the node’s parameters in Subsection VI-D.~\\
-    In addition, we create a graph from the optimization environment, and we use the graph search algorithm to find the optimal path for the drone. However, it takes a lot of time to generate a graph, and we assume that the base station already has a large number of graphs that have been created considering the varying environmental conditions. It takes 10 seconds to get the environment graph into the matlab and about 0.5 seconds to find the optimal path on the graph. We wrote the above in Section VI.
+	R7-2: We conducted the simulation using MATLAB of Mathworks. Our computational cost is the amount of RAM regarding the size of a graph to create an optimization environment. We determine the number of nodes by the number of steps per each parameter in the environment. We specified the range of the node's parameters in Subsection~VI-D.
+    We also obtain the number of edges by multiplying the number of nodes, the number of directions the drone can move in, and the number of speeds in the given ranges the drone can select.
+    Our methodology includes creating a graph from the optimization environment and applying a graph search algorithm to find the drone's optimal path. However, we assume our solution to be an offline path planning so that the graph generation time and the computing time are not our serious consideration.
+    Therefore, we assume that the base station already has a large number of graphs considering the varying environmental conditions. It took 10 seconds to get the environment graph into MATLAB and about 0.5 seconds to find the optimal path on the graph in our experimental setup. We mentioned the above in Section VI.
 	}
 	~\\
 	~\\
@@ -732,6 +864,7 @@ Wind speed varies with height up to a certain elevation. However in the testing,
     \textcolor{red}{The algorithm parameters are the number of nodes, and we determine the number of nodes $N_n$ by the number of steps per each parameter in the environment.  
     We set the range of coordinate information in the node to 20 steps of 20\,m each for the N-axis and E-axis, 20 steps of 3\,m for the U-axis, and also set the range of drone speed to 7\,steps of 2\,m/s. 
     The wind map has a speed range of up to 9\,m/s with eight directions.
+    We also obtain the number of edges by multiplying the number of nodes, the number of directions the drone can move in, and the number of speeds in the given ranges the drone can select.
     }
     \end{mdframed} 
     ~\\
@@ -745,8 +878,7 @@ Wind speed varies with height up to a certain elevation. However in the testing,
     ~\\
 	\item \textit
 	{
-	R7-3: Although we do not proceed with online planning, the edge selected by the Dijkstra algorithm has the smallest energy consumption compared with all the edges connected to the same node, and the derived path is the optimal solution in the discretized environment.
-    Instead of online planning, we chose to improve the environment for the optimization, and we presented Table IV as a result of the optimization. 
+	R7-3: Although we do not proceed with online planning, the edge selected by the Dijkstra algorithm has the smallest energy consumption compared with all the edges connected to the same node, and the derived path is the optimal solution in the discretized environment. We chose to improve the environment for the optimization instead of online planning, and we presented Table IV as a result of the optimization. 
 	}
 	~\\
 	~\\
@@ -780,9 +912,10 @@ Wind speed varies with height up to a certain elevation. However in the testing,
 	Reviewer recommends a thorough proofread for occasional but important language problems.
 	The use of articles is sometimes not correct, some examples are: ``Finally, we demonstrate a example of energy saving by finding an energy efficient path during the operation of a drone using the proposed accurate power consumption model.'' it should be ``we demonstrate an example''
 	}
+	~\\
 	\item \textit
 	{
-	R8: We sincerely apologize for many grammar errors. We carefully double-checked the manuscript and fully revised sentences. We denoted changed sentences as red color. We appreciate your invaluable comments.
+	R8: We apologize for any grammar errors. We thoroughly double-checked the whole manuscript and completely revised sentences. We highlighted the revised sentences in red color. 
     }
     ~\\
     \item \textbf
@@ -795,32 +928,55 @@ Wind speed varies with height up to a certain elevation. However in the testing,
 	Please check the latex code for the Algorithm 1. It can be better, for instance, adding vertical lines showing the loops or if else conditions.
 	Furthermore, the caption can be enclosed by line above and below and a line below the algorithm 1.
 	}
+	~\\
 	\item \textit
 	{
-	R9: 그림 수정이 필요하여 잠시 비워두었습니다. (주중에 채워놓겠습니다.)
+	R9-1: We apologize to the reviewer for our mistakes. We carefully double-checked the manuscript and fully revised manuscripts.
     }
     ~\\
 	~\\
-	\textbf{We modified Section~VI in the manuscripts as follows (Page 12, Line ZZ.)}\\
+	\textbf{We modified Section~I in the manuscripts as follows (Page 1, Line ZZ.)}\\
     \begin{mdframed}[ linewidth=.75pt, userdefinedwidth=0.9\textwidth]
-
+    \textcolor{red}{In order to figure out the power consumption characteristics of drones, we measure the top-of-the-line commercial drone through dozens of hours on the air and ground.}
     \end{mdframed} 
+	~\\
+	\item \textit
+	{
+	R9-2: We modified the caption of Fig. 13 to fit the current simulation conditions.
+    }
     ~\\
 	~\\
-	\textbf{We modified Section~VI in the manuscripts as follows (Page 12, Line ZZ.)}\\
+   \textbf{We modified Fig. 13 in the manuscript as follows (Page 13.)}\\
     \begin{mdframed}[ linewidth=.75pt, userdefinedwidth=0.9\textwidth]
-
-    \end{mdframed} 
+    \begin{tabular}{m{0.3\textwidth}m{0.3\textwidth}m{0.3\textwidth}|}
+    \includegraphics[scale=0.53]{fig13/wind_N.pdf}&
+    \includegraphics[scale=0.57]{fig13/wind_NW.pdf}&
+    \includegraphics[scale=0.57]{fig13/wind_SE.pdf}\\
+    \small \textcolor{red}{(g) The discretized north direction wind map.} &
+    \small \textcolor{red}{(h) The discretized north-west direction wind map.} &
+    \small \textcolor{red}{(i) The discretized south-east direction wind map.} \\
+    \end{tabular}
     ~\\
+    ~\\
+    \textbf{Fig. 13.} \textcolor{red}{Optimization result of two example cases (a-f) considering wind map derived by the inlet velocity with 9~m/s (g-i). 
+    The drone travel in the SE direction between the two points that are at different altitudes.}
+    \label{fig: wind_opt}
+    %\end{figure*}
+ \end{mdframed}       
 	~\\
-	\textbf{We modified Section~VI in the manuscripts as follows (Page 12, Line ZZ.)}\\
-    \begin{mdframed}[ linewidth=.75pt, userdefinedwidth=0.9\textwidth]
-
-    \end{mdframed} 
-	~\\
+	\item \textit
+	{
+	R9-3: We changed the time unit of all figures from sec to s according to the SI unit.
+    }
+    ~\\
+    \item \textit
+	{
+	R9-4: We modified our Algorithm 1 adding vertical lines showing the loops or if-else conditions. (R-6)
+    }
+ 	~\\
     ~\\
 \end{description}
-
+\pagebreak
 \textbf{\large Reviewer 4:}\\
 This manuscript presents a deep-neural-network-based approach to model the energy consumption in terms of motion parameters of a multi-copter and a path-planning algorithm that minimizes the energy consumption given a predefined starting and ending points. An off-the-shelf multi-copter was adopted to validate some aspects of the proposed methodology.  Please see the detailed comments below. 
 \begin{description}
@@ -830,7 +986,7 @@ This manuscript presents a deep-neural-network-based approach to model the energ
 	}
 	\item \textit
 	{
-	R1: We sincerely apologize for many grammar errors. We carefully double-checked the manuscript and fully revised sentences. We denoted changed sentences as red color. We appreciate your invaluable comments.  
+	R1: We apologize for any grammar errors. We thoroughly double-checked the whole manuscript and completely revised sentences. We highlighted the revised sentences in red color.  
 	}
 	~\\
     ~\\
@@ -902,17 +1058,13 @@ This manuscript presents a deep-neural-network-based approach to model the energ
 	}
 	\item \textit
 	{
-	R3: In the modeling process, the wind affects a significant influence on the drone’s power consumption. Therefore, when constructing the power consumption model, we installed a wind sensor on the drone, collected the wind data in real-time, included those data into a learning dataset to model the power consumption.
-    Apart from the modeling, in the optimization process, the online planning involves several problems using wind data as a parameter.
-    ~\\
-    ~\\
-    First of all, the more parameters to consider in the optimization, the more complex the optimization problem becomes. The on-board computer of the drone is not suitable for handling huge computations in real-time.
-    Secondly, even if the drone receives the computation results that are solved externally, the drone must deliver wind information to the server for the calculation in real-time , the drone requires additional cost for long-distance communications. 
-    Moreover, Our research is to reduce the energy consumption of the drone without significant hardware improvements. The online planning method is not suitable for us.~\\
-    However, offline planning also requires to know the direction and the speed of the wind at every grid cell of the simulation environment. In order to derive the optimal path for reality, the simulation environment must also be as similar as possible to the actual conditions.
-    ~\\
-    ~\\
-    So, we used the computational fluid dynamics (CFD) to interpret the flow in our simulation environment, and to adapt it to our grid resolution, we made it in the form of a discretized wind map to enhance our simulation environment close to reality.
+	R3: We mounted an onboard wind sensor on the drone during the modeling process and collected real-time wind data. We put the real-time wind data into a learning dataset to configure the power consumption as the wind affects a significant influence on the drone's power consumption. The online planning involves several problems using wind data as a parameter in the optimization process. 
+    ~\\~\\
+    * First, the inclusion of more parameters to the optimization process increases complexity super linearly. The onboard computer of the drone has a limited computation power.~\\~\\ 
+    * Second, the drone must send wind information to the computation server for computation offloading. That is, the drone requires additional communication costs. Moreover, our goal of the research is to reduce the energy consumption of the drone without significant hardware improvements. The online planning method is out of the scope of this work. 
+    ~\\~\\
+    Therefore, we present the offline planning that transmits the optimal path derived by the base station that computes complex computation to the drone under the assumption that there is no sudden accident (e.g., bird strike). However, offline planning also requires wind information at every grid cell of the simulation environment. The solution fidelity is mostly dependent on how the simulation environment is similar to real conditions. 
+    We adopted the computational fluid dynamics (CFD) to interpret the wind flow and made it in the form of a discretized wind map to improve the offline simulation environment close to reality. 
     We explained the CFD and wind maps in Subsection VI-B and presented the Fig.13 of wind maps used in simulation in Subsection VII-B.
 	}
 	~\\
@@ -984,13 +1136,14 @@ This manuscript presents a deep-neural-network-based approach to model the energ
 	R4: We appreciate your invaluable comment. We also agree with the reviewer's comment that the explanation of the algorithm would be helpful for readers. We enhance the description of the algorithm as follows: 
 	~\\
 	~\\
-	When we configure the optimization environment, we store the three-dimensional coordinates and drone parameters on the graph. 
+    We store the information such as the three-dimensional coordinates and drone’s states on every node of the graph when we configure the simulation environment for the optimization.~\\
     The node $n_i$ in the graph is defined as (6.1).
     \begin{equation*}
     n_i = (x_i, y_i, z_i, v_i, a_i, w_i, d_i). \tag{6.1} \label{eq:node}
-    \end{equation*}
-    Visiting each node of a graph is called traversal, and the Dijkstra algorithm, a traversal method, searches for the path that has the least weight from a source node to a destination node in the graph. The Dijkstra algorithm uses a priority queue instead of a normal queue and searches for the shortest path relatively quickly compared with the breadth-first search and depth-first search. The Dijkstra algorithm selects a node from the queue and searches all adjacent nodes to adjust the priority. When searching all queues, select the edge with the smallest cost and infers the optimal energy path.
-    We presented the procedure of finding the drone's minimum energy optimal path in our configured problem as Algorithm 2, and we explained the algorithm line-by-line in Subsection~VI-D.
+    \end{equation*}~\\
+    Our parameter of the algorithm is the number of nodes and edges. We determine the number of nodes $N_n$ by dividing the environment range for a mission into the grid resolution. We obtain the number of edges by multiplying the number of nodes, the number of directions the drone can move in, and the number of speeds in the given ranges the drone can select.
+    The Dijkstra algorithm, a graph search algorithm, searches for the path that has the least weight from a source node to a destination node in the graph. The Dijkstra algorithm uses a priority queue instead of a normal queue and searches for the shortest path relatively quickly compared with the breadth-first search and depth-first search. The Dijkstra algorithm selects a node from the queue and searches all adjacent nodes to adjust the priority. 
+    This algorithm derives the optimal energy path by choosing the edge according to the priority when the queue becomes empty. We presented the procedure of finding the drone's minimum energy optimal path in our configured problem as Algorithm~2, and we explained the algorithm line-by-line in Subsection~VI-D.
 	}
 	~\\
     ~\\
@@ -1111,7 +1264,7 @@ This manuscript presents a deep-neural-network-based approach to model the energ
 	\item \textit
 	{
     R5: We appreciate that we get a chance to perfect our manuscript. We described our algorithm in detail as follows:\\
-    We define the time-related terms in more detail. In Algorithm1, $\Delta t$ refers to the time it takes a drone to travel between two nodes. This $\Delta t$ is the sum of $\Delta t_1$ and $\Delta t_2$. $\Delta t_1$ is defined as the time taken to accelerate or decelerate from the speed of the previous node to the one of the next node. And $\Delta t_2$ is defined as the traveling time at the constant velocity to the next node after acceleration or deceleration. We added the explanation of Algorithm 1 to the lower portion of Subsection-VI-C and newly define the Algorithm 1.
+    We also defined the time-related terms in more detail. In algorithm~1, $\Delta t$ represents the time for the drone to move between two nodes. $\Delta t_1$ is defined as the time to accelerate or decelerate to meet the speed change from the previous node to the next node and $\Delta t_2$ is defined as the traveling time at the constant speed to reach the next node after the acceleration or deceleration. Therefore, $\Delta t$ is the sum of $\Delta t_1$ and $\Delta t_2$. We redefined Algorithm~1 and added the explanation to the lower portion of Subsection~VI-C.
 	}
 	~\\
     ~\\
@@ -1237,11 +1390,7 @@ $\Delta t[axis] = \infty $
 	}
 	\item \textit
 	{
-    R6-1: We formulate our optimization problem and describe it in the additional Subsection in Section VI. In our optimization problem, the workspace $W$ where the drone is operated, the wind information $F$ in the horizontal directions provided through the discretized wind map, and the information of obstacles in the environment $BL$ are $Given$ information.
-    The starting point and destination of the mission, and information of the payload are also $Given$ information.
-    We define the function $Path$ using $w$ within the $W$ and the velocity of the drone $v$ as $R$, and we use the function $Path$ as our control knob.
-    Our objective is to find $Path$ that minimizes the function $E$ of the energy through the optimization process when a base station receives the mission $m$ from a drone.
-    The energy function $E$ cannot exceed the initial battery capacity, $BL$ must be zero for all $w$, and $Path$ consists only of $w$ presented in $W$.
+    R6-1: We formulated our optimization problem and described it in the additional Subsection in Section~VI. The given information in our optimization problem includes the following: the workspace where the drone is operated, the wind information $F$ in the horizontal directions provided through the discretized wind map, the information of obstacles in the environment $BL$, the starting point and destination of the mission, and the information of the payload. We define the function $Path$ using $w$ within the $W$ and the velocity of the drone $v$ as $R$, and use it as our $control knob$. Our $objective$ is to find the $Path$ that minimizes the energy consumption function $E$ through the optimization process when the base station receives the mission $m$ from a drone. The energy function $E$ cannot exceed the initial battery capacity, $BL$ must be zero for all $w$, and $Path$ consists only of $w$ presented by $W$.
 	}
 	~\\
     ~\\
@@ -1305,9 +1454,7 @@ $\Delta t[axis] = \infty $
     ~\\
 	\item \textit
     {
-	R6-2:  
-    The Dijkstra algorithm selects a node from the queue and searches all adjacent nodes to adjust the priority. When searching all queues, select the edge with the smallest cost and infers the optimal energy path.
-    In R-4, We already presented Algorithm 2 and explained the process of solving the optimization problem using the Dijkstra algorithm line-by-line.
+	R6-2: The Dijkstra algorithm selects a node from the queue and searches all adjacent nodes to adjust the priority. It selects the edge with the smallest cost when searching all queues and infers the optimal energy path. We presented Algorithm~2 and explained the process of solving the optimization problem using the Dijkstra algorithm line-by-line. (R-4)
 	}
 	~\\
 	~\\
@@ -1317,13 +1464,11 @@ $\Delta t[axis] = \infty $
 	}
 	\item \textit
 	{
-	R7: We added information about each path's traveling time in Table~IV so that readers can easily examine our optimization results.  
-    In general, the energy consumption of the drone increases as it takes more time to reach the destination. However, Case 1 shows an impressive result. 
-    We aimed that find a way to reduce the drone's energy consumption by optimizing the path to the influence of the external environment without significant hardware improvements, and the result shows that even if the drone flies for about 3 seconds longer than the baseline, the optimal path consumes less energy than the baseline.  
+	R7: We added information about each path’s traveling time in Table IV so that readers can easily examine our optimization results. The energy consumption of the drone increases when it takes more time to reach the destination in general. However, Case~1 shows an impressive result. Even if the drone flies longer for about~3 seconds, the optimal path consumes less energy than the baseline. We achieved the goal of reducing the drone's energy consumption by optimizing paths that take into account the influence of the external environment without significant hardware improvements.
 	}
     ~\\
 	~\\
-	\textbf{We modified Table~IV in the manuscripts as follows (Page 14.)}\\
+	\textbf{We modified Table~IV. in the manuscripts as follows (Page 14.)}\\
     \begin{mdframed}[ linewidth=.75pt, userdefinedwidth=0.9\textwidth]
      \textcolor{red}{\textbf{Table IV.} Comparison of the energy consumption between the baseline and the optimal path affected by wind in each case.}  
     \centering
